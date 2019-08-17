@@ -24,15 +24,18 @@ class FindingCreateForm(forms.ModelForm):
         self.fields['description'].widget.attrs['placeholder'] = \
             'What is this ...'
         self.fields['impact'].widget.attrs['placeholder'] = \
-            'What is the impact ...'
+            'Not currently used by Dragos'
+        self.fields['impact'].widget.attrs['disabled'] = True
         self.fields['mitigation'].widget.attrs['placeholder'] = \
             'What needs to be done ...'
         self.fields['replication_steps'].widget.attrs['placeholder'] = \
             'How to reproduce/find this issue ...'
         self.fields['host_detection_techniques'].\
-            widget.attrs['placeholder'] = 'How to detect it on an endpoint ...'
+            widget.attrs['placeholder'] = 'Not currently used by Dragos'
+        self.fields['host_detection_techniques'].widget.attrs['disabled'] = True
         self.fields['network_detection_techniques'].\
-            widget.attrs['placeholder'] = 'How to detect it on a network ...'
+            widget.attrs['placeholder'] = 'Not currently used by Dragos'
+        self.fields['network_detection_techniques'].widget.attrs['disabled'] = True
         self.fields['references'].widget.attrs['placeholder'] = \
             'Some useful links and references ...'
         self.fields['finding_guidance'].widget.attrs['placeholder'] = \
