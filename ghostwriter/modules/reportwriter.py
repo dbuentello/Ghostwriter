@@ -987,25 +987,26 @@ class Reportwriter():
                     self.critical_color_hex[0],
                     self.critical_color_hex[2],
                     self.critical_color_hex[2])
-            # Add an Affected Entities section
-            self.spenny_doc.add_heading('Affected Entities', 4)
-            if not finding['affected_entities']:
-                finding['affected_entities'] = 'Must Be Provided'
-            all_entities = finding['affected_entities'].split('\n')
-            for entity in all_entities:
-                entity = entity.strip()
-                p = self.spenny_doc.add_paragraph(entity, style='Normal')
-                self.list_number(p, level=0, num=False)
-                p.paragraph_format.left_indent = Inches(0.5)
+            # Add a list of affected entities if supplied
+            if finding['affected_entities']:
+                self.spenny_doc.add_heading('Affected Entities', 4)
+                all_entities = finding['affected_entities'].split('\n')
+                for entity in all_entities:
+                    entity = entity.strip()
+                    p = self.spenny_doc.add_paragraph(entity, style='Normal')
+                    self.list_number(p, level=0, num=False)
+                    p.paragraph_format.left_indent = Inches(0.5)
             # Add a Description section that may also include evidence figures
             self.spenny_doc.add_heading('Description', 4)
             self.process_text(finding['description'], finding, report_json)
-            # Create Impact section
-            self.spenny_doc.add_heading('Impact', 4)
-            self.process_text(
-                finding['impact'],
-                finding,
-                report_json)
+            # Check if Impacts are provided before creating impacts
+            if finding['impact']:
+                self.spenny_doc.add_heading(
+                    'Impact', 4)
+                self.process_text(
+                    finding['impact'],
+                    finding,
+                    report_json)
             # Create Recommendations section
             self.spenny_doc.add_heading('Recommendation', 4)
             self.process_text(
@@ -1036,9 +1037,11 @@ class Reportwriter():
                     finding['network_detection_techniques'],
                     finding,
                     report_json)
-            # Create References section
-            self.spenny_doc.add_heading('References', 4)
-            self.process_text(finding['references'], finding, report_json)
+
+            # Check if references are provided before creating section
+            if finding['references']:
+                self.spenny_doc.add_heading('References', 4)
+                self.process_text(finding['references'], finding, report_json)
             # On to the next finding
             self.spenny_doc.add_page_break()
         # Finalize document and return it for an HTTP response
