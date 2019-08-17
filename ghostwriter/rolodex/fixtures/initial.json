@@ -17,7 +17,7 @@
       "model": "rolodex.projecttype",
       "pk": 3,
       "fields": {
-          "project_type": "Phishing Assessment"
+          "project_type": "Assessment"
       }
     },
     {
