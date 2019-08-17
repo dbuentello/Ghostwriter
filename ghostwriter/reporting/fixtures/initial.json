@@ -64,14 +64,21 @@
         "model": "reporting.findingtype",
         "pk": 4,
         "fields": {
-            "finding_type": "Web"
+            "finding_type": "Application"
         }
     },
     {
         "model": "reporting.findingtype",
         "pk": 5,
         "fields": {
-            "finding_type": "Mobile"
+            "finding_type": "Hardware"
+        }
+    },
+    {
+        "model": "reporting.findingtype",
+        "pk": 6,
+        "fields": {
+            "finding_type": "Human"
         }
     }
   ]
